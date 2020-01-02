@@ -1,9 +1,15 @@
 import React from 'react';
-import {View, Text , StyleSheet} from 'react-native';
+import {View , StyleSheet} from 'react-native';
+import {Text, Input, Button} from 'react-native-elements'
 
-const TrackListScreen =()=>{
+const TrackListScreen =({navigation})=>{
   return(
-     <Text>TrackListScreen</Text>
+    <View>
+        <Text h3>Sign Up</Text>
+        <Input label="Email" />
+        <Input label="Password" />
+        <Button title="Sign up" onPress={()=>navigation.navigate('TrackDetails')} />
+     </View>
   );
 };
 
