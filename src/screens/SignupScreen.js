@@ -1,27 +1,28 @@
-import React, { useState, useContext } from 'react';
-import {View , StyleSheet, use} from 'react-native';
-import {Text, Input, Button} from 'react-native-elements'
-import Spacer from '../components/spacer';
+import React, { useContext } from 'react';
+import {View , StyleSheet} from 'react-native';
+import {NavigationEvents} from 'react-navigation';
 import {Context as AuthContext} from '../context/authContext';
+import AuthFrom from '../components/authForm';
+import NavLink from '../components/navLink';
 
-
-const SignupScreen =({navigation})=>{
-  const {state, singup}= useContext(AuthContext);
-  const [email ,setEmail]= useState('');
-  const [password , setPassword]=useState('');
+const SignupScreen =()=>{
+  const {state, singup,clearErrorMessage}= useContext(AuthContext);
 
   return(
      <View style={styles.container}>
-        <Spacer>
-        <Text h3>Sign Up</Text>
-        </Spacer>
-        <Input label="Email" autoCapitalize="none" autoCorrect={false} value={email} onChangeText={setEmail} />
-        <Spacer/>
-        <Input  secureTextEntry label="Password" autoCapitalize="none" autoCorrect={false} value={password} onChangeText={setPassword} />
-        {state.errorMessage ? <Text style={styles.errorMessage}>{state.errorMessage}</Text> :null}
-        <Spacer>
-        <Button title="Sign up" onPress={()=> singup({email, password})} />
-        </Spacer>
+        <NavigationEvents
+          onWillBlur={clearErrorMessage}
+        />
+         <AuthFrom
+          headerText="Create Account "
+          errorMessage={state.errorMessage}
+          buttonText="Sign Up"
+          onSubmit={singup}
+         />
+         <NavLink
+           linkText="Do you have alredy Account ? Sign In"
+           routeName='Signin'
+         />
      </View>
   );
 };
@@ -38,12 +39,6 @@ const styles=StyleSheet.create({
     flex:1,
     justifyContent:'center',
     marginBottom:100
-  },
-  errorMessage:{
-  fontSize:16,
-  color:'red',
-  marginLeft:15,
-  marginTop:15
   }
 });
 

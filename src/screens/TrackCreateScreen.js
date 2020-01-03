@@ -1,9 +1,17 @@
-import React from 'react';
-import {View, Text , StyleSheet} from 'react-native';
+import React, {useEffect} from 'react';
+import { StyleSheet} from 'react-native';
+import {Text} from 'react-native-elements';
+import {requestPermissionsAsync} from 'expo-location'
+import {SafeAreaView} from 'react-navigation';
+import Map from '../components/map';
 
+useEffect
 const TrackCreateScreen =()=>{
   return(
-     <Text>TrackCreateScreen</Text>
+     <SafeAreaView forceInset={{top:'always'}}>
+     <Text h3>Create Track</Text>
+     <Map/>
+     </SafeAreaView>
   );
 };
 
